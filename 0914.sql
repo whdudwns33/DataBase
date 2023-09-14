@@ -8,5 +8,6 @@ FROM EMP;
 
 SELECT SAL* 12 FROM EMP;
 
+SELECT * FROM EMP;
 -- 
 -- 
