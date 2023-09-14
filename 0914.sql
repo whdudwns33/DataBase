@@ -66,6 +66,8 @@ AND JOB IN ('MANAGER','CLERK')
 AND ENAME NOT LIKE '_L%';
 
 
+
+-- 추가 예제문제
 SELECT * FROM EMP;
 -- EMP 테이블에서 COMM의 값이 NULL이 아닌 정보 조회
 SELECT * FROM EMP
