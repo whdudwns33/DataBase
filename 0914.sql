@@ -6,3 +6,4 @@ SELECT SAL, COMM FROM EMP;
 SELECT SAL, COMM, DEPTNO 
 FROM EMP;
 -- 안녕하세요
+-- 반갑습니다.
