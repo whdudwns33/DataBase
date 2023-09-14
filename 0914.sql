@@ -52,13 +52,17 @@ WHERE SAL >= 2000 AND SAL <= 3000;
 -- 5. 사원 이름에 E가 포함되어 있는 30번 부서의 사원 중 급여가
 --  1000 ~ 2000 사이가 아닌 사원 이름 , 사원 번호, 급여, 부서 번호 출력
 SELECT EMPNO, ENAME, JOB, SAL, DEPTNO FROM EMP
-WHERE DEPTNO = 30 AND (1000 > SAL OR 2000 < SAL);
+WHERE DEPTNO = 30 
+AND ENAME LIKE '%E%'
+AND (1000 > SAL OR 2000 < SAL);
+-- SAL NOT BETWEEN 1000 AND 2000
 
--- 6. 추가 수당이 존재 하지 않고 상급자의 직책이 MANAGER, CLERK인
+-- 6. 추가 수당이 존재 하지 않고 상급자가 있고 직책이 MANAGER, CLERK인
 -- 사원 중에서 사원 이름의 두 번째 글자가 L이 아닌 사원의 정보 출력
 SELECT * FROM EMP
 WHERE COMM IS NULL
-AND MGR >= 7800
+AND MSG IS NOT NULL
+AND JOB IN ('MANAGER','CLERK')
 AND ENAME NOT LIKE '_L%';
 
 
