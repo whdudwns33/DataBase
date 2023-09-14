@@ -38,7 +38,7 @@ WHERE ENAME LIKE '%S';
 -- 2. 30번 부서에서 근무하는 사원 중 직책이 SALESMAN인
 -- 사원의 사원 번호 이름, 직책, 급여, 부서번호 출력
 SELECT EMPNO, ENAME, JOB, SAL, DEPTNO FROM EMP
-WHERE DEPTNO = 30;
+WHERE DEPTNO = 30 AND JOB = 'SALESMAN';
 
 -- 3. 20번 , 30번 부서에서 근무하는 사원 중 급여가 2000초과인
 -- 사원의 사원번호, 이름, 급여, 부서 번호 출력
