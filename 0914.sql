@@ -66,4 +66,37 @@ AND JOB IN ('MANAGER','CLERK')
 AND ENAME NOT LIKE '_L%';
 
 
+SELECT * FROM EMP;
+-- EMP 테이블에서 COMM의 값이 NULL이 아닌 정보 조회
+SELECT * FROM EMP
+WHERE COMM IS NOT NULL;
+
+-- EMP 테이블에서 커미션을 받지 못하는 직원 조회
+SELECT * FROM EMP
+WHERE COMM IS NULL OR COMM = 0;
+
+-- EMP 테이블에서 관리자가 없는 직원 정보 조회
+SELECT * FROM EMP
+WHERE MGR IS NULL;
+
+-- EMP 테이블에서 급여를 많이 받는 직원 순으로 조회
+SELECT * FROM EMP
+ORDER BY SAL DESC;
+
+-- EMP 테이블에서 급여가 같을 경우 커미션을 내림차순 정렬 조회
+SELECT * FROM EMP
+ORDER BY SLA ASC, COMM DESC;
+
+-- EMP 테이블에서 사원번호, 사원명, 직급, 입사일 조회(정렬은 입사일 오름차순)
+SELECT EMPNO, ENAME, JOB, HIREDATE FROM EMP
+ORDER BY HIREDATE ASC;
+
+-- EMP 테이블에서 사원번호, 사원명 조회, (사원번호 기준 내림차순 정렬)
+SELECT EMPNO, ENAME FROM EMP
+ORDER BY EMPNO DESC;
+
+-- EMP 테이블에서 사번, 입사일, 사원명, 급여 조회
+-- (부서번호가 빠른 순으로 , 같은 부서일 때는 최근 입사일 순으로 처리)
+SELECT EMPNO, HIREDATE, ENAME, SAL FROM EMP
+ORDER BY EMPNO ASC, HIREDATE ASC;
 
