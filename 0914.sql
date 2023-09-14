@@ -100,5 +100,5 @@ ORDER BY EMPNO DESC;
 --8. EMP 테이블에서 사번, 입사일, 사원명, 급여 조회
 -- (부서번호가 빠른 순으로 , 같은 부서일 때는 최근 입사일 순으로 처리)
 SELECT EMPNO, HIREDATE, ENAME, SAL FROM EMP
-ORDER BY EMPNO ASC, HIREDATE ASC;
+ORDER BY EMPNO ASC, HIREDATE DESC;
 
