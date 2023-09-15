@@ -99,7 +99,101 @@ SELECT TRIM('+' || '              ASDAD       ' || '+')
 FROM DUAL;
 
 
+-- 날짜 데이터를 다루는 날짜 함수
+-- SYSDATE: 운영체계의 현재 날짜와 시간 정보를 가져옴
+SELECT SYSDATE FROM DUAL;
+
+-- 날짜 데이터는 정수값의 +, -가 가능
+SELECT SYSDATE AS 오늘,
+SYSDATE - 1 AS 어제,
+SYSDATE + 1 AS 내일
+FROM DUAL;
 
 
+-- 몇 개월 이후 날짜 구하는 ADD_MONTHZ
+-- 특정 날짜에 지정한 개월 수 이후의 날짜 데이터를 반환하는 함수
+SELECT SYSDATE, 
+ADD_MONTHS(SYSDATE, 3) -- 2번째 인자는 달수를 의미
+FROM DUAL;
 
+-- EMP TABLE에서 입사 10주년이 되는 사원들 데이터 출력
+SELECT EMPNO, ENAME, HIREDATE,
+    ADD_MONTHS(HIREDATE, 120) AS 입사10주년
+FROM EMP;
+
+
+-- SYSDATE와 ADD_MONTHS 함수를 사용하여 현재 날짜와 6개월 후 날짜 출력
+SELECT SYSDATE AS 오늘
+FROM DUAL;
+
+SELECT SYSDATE, ADD_MONTHS(SYSDATE, 6) AS 시간을달려서
+FROM DUAL;
+
+-- 두 날짜간의 개월 수 차이 구하기
+SELECT EMPNO, ENAME, HIREDATE, SYSDATE, 
+    MONTHS_BETWEEN(HIREDATE, SYSDATE) AS MONTH01,
+    MONTHS_BETWEEN(SYSDATE, HIREDATE) AS MONTH02,
+    TRUNC(MONTHS_BETWEEN(SYSDATE, HIREDATE)) AS MONTH03,-- 소수점 이하 삭제
+    ROUND(MONTHS_BETWEEN(SYSDATE, HIREDATE)) AS MONTH04-- 반올림
+FROM EMP;
+
+-- 날짜 정보 추출 함수
+-- EXTRACT 함수는 날짜 유형의 데이터로 부터 날짜 정보를 분리하여 새로운 컬럼의 형태로 추출
+SELECT EXTRACT(YEAR FROM DATE '2023 - 09 -15')
+FROM DUAL;
+
+
+SELECT * 
+FROM EMP
+WHERE EXTRACT(MONTH FROM HIREDATE)  = 12;
+
+
+-- 9. **오늘 날짜에 대한 정보 조회**
+SELECT SYSDATE FROM DUAL;
+-- 10. **EMP테이블에서 사번, 사원명, 급여 조회
+--   (단, 급여는 100단위까지의 값만 출력 처리하고 급여 기준 내림차순 정렬)**
+SELECT EMPNO, ENAME, 
+    ROUND(SAL, -2) 
+FROM EMP
+ORDER BY ROUND(SAL, -2) DESC; 
+-- 11. **EMP테이블에서 사원번호가 홀수인 사원들을 조회**
+SELECT * FROM EMP
+WHERE MOD(EMPNO, 2) = 1;
+-- 12. **EMP테이블에서 사원명, 입사일 조회 (단, 입사일은 년도와 월을 분리 추출해서 출력)**
+SELECT ENAME, 
+    EXTRACT(YEAR FROM HIREDATE), 
+    EXTRACT(MONTH FROM HIREDATE)
+FROM EMP;
+-- 13. **EMP테이블에서 9월에 입사한 직원의 정보 조회**
+SELECT * 
+FROM EMP
+WHERE EXTRACT(MONTH FROM HIREDATE) = 9;
+
+-- 14. **EMP테이블에서 81년도에 입사한 직원 조회**
+SELECT * 
+FROM EMP
+WHERE EXTRACT(YEAR FROM HIREDATE) = 1981;
+
+-- 15. **EMP테이블에서 이름이 'E'로 끝나는 직원 조회**
+SELECT *
+FROM EMP
+WHERE ENAME LIKE '%E';
+
+-- 16. **EMP테이블에서 이름의 세 번째 글자가 'R'인 직원의 정보 조회**
+SELECT *
+FROM EMP
+WHERE INSTR(ENAME, 'R') = 3;
+
+
+-- - **LIKE 사용**
+-- 1. **EMP테이블에서 사번, 사원명, 입사일, 입사일로부터 40년 되는 날짜 조회**
+SELECT EMPNO, ENAME, HIREDATE, ADD_MONTHS(HIREDATE, 480)
+FROM EMP;
+-- 2. **EMP테이블에서 입사일로부터 38년 이상 근무한 직원의 정보 조회**
+SELECT *
+FROM EMP
+WHERE MONTHS_BETWEEN(SYSDATE, HIREDATE) >= 38;
+-- 3. **오늘 날짜에서 년도만 추출**
+SELECT EXTRACT(YEAR FROM SYSDATE)
+FROM DUAL;
 
