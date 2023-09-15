@@ -487,7 +487,33 @@ FROM EMP;
     
 
 
---  다중행 함수
+--  다중행 함수: 여러 행에 대해 함수가 적용되어 하나의 결과를 나타내는 함수(집계함수)
+--  여러행이 입력되어 결과가 하나의 행으로 출력
+SELECT SUM (SAL)
+FROM EMP;
+-- 집계된 SUM과 개별번호 간의 맵핑이 안되 오류
+SELECT SUM(SAL), EMPNO
+FROM EMP;
+
+-- GROUP BY : 그룹으로 묶을 때 사용, 그룹으로 묶을 꺼면 어떠한 중복이 존재해야함
+SELECT DEPTNO, SUM(SAL)
+FROM EMP
+GROUP BY DEPTNO;
+
+SELECT JOB, SUM(SAL)
+FROM EMP
+GROUP BY JOB;
+
+SELECT JOB, SUM(SAL), COUNT(*/*COUNT는 항상 *을 넣어야함*/), 
+    ROUND(AVG(SAL), 2), MAX(SAL), MIN(SAL)
+FROM EMP
+GROUP BY JOB;
+
+
+-- SELECT DEPNO, JOB, SUM(SAL)
+-- FROM EMP
+-- GROUP BY DEPNO ,JOB;
+
 
 
 
