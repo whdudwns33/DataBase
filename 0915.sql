@@ -422,6 +422,15 @@ FROM EMP;
 SELECT NULLIF(10, 10), NULLIF('A','B')
 FROM DUAL;
 
+-- DECODE : 주어진 데이터 값이 조건 값과 일치하는 값 출력
+-- 일치하지 않으면 기본값 출력
+SELECT EMPNO, ENAME, JOB, SAL,
+    DECODE(JOB, 'MANAGER',SAL*1.2,
+    'SALESMAN',SAL * 1.05,
+    'ANALYST',SAL,
+    SAL*1.03) AS 연봉인상
+FROM EMP;
+
 
 
 
