@@ -415,7 +415,7 @@ FROM EMP;
 -- NVL2() : NULL이 아닌 경우와 NULL인 경우 모두에 대해서 값을 지정할 수 있음
 SELECT EMPNO, ENAME, COMM, SAL,
     NVL2(COMM, 'O', 'X'), -- COMM이 있으면 O 없으면 X
-    NVL2(COMM, SAL*12+COMMM, SAL*12) AS 연봉
+    NVL2(COMM, SAL*12+COMM, SAL*12) AS 연봉
 FROM EMP;
 
 -- NULLIF(): 두 값이 동일하면 NULL 반환, 아니면 첫 번째 값 반환
@@ -425,18 +425,30 @@ FROM DUAL;
 -- DECODE : 주어진 데이터 값이 조건 값과 일치하는 값 출력
 -- 일치하지 않으면 기본값 출력
 SELECT EMPNO, ENAME, JOB, SAL,
-    DECODE(JOB, 'MANAGER',SAL*1.2,
+    DECODE(JOB,
+    'MANAGER',SAL*1.2,
     'SALESMAN',SAL * 1.05,
     'ANALYST',SAL,
     SAL*1.03) AS 연봉인상
 FROM EMP;
 
+-- CASE문
+SELECT EMPNO, ENAME, JOB, SAL,
+    CASE JOB
+        WHEN 'MANAGER' THEN SAL * 1.1
+        WHEN 'SALESMAN' THEN SAL * 1.05
+        WHEN 'ANALYS' THEN SAL
+        ELSE SAL * 1.1
+    END AS 연봉인상
+FROM EMP;
 
 
-
-
-
-
-
-
+-- 열 값에 따라서 출력 값이 달라지는 CASE문
+SELECT EMPNO, ENAME, COMM,
+    CASE
+        WHEN COMM IS NULL THEN '해당 사항 없음'
+        WHEN COMM = 0 THEN '수당 없음'
+        WHEN COMM > 0 THEN '수당 : '|| COMM
+    END AS "성과급기준"
+FROM EMP;
 
