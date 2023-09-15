@@ -150,20 +150,24 @@ WHERE EXTRACT(MONTH FROM HIREDATE)  = 12;
 
 -- 9. **오늘 날짜에 대한 정보 조회**
 SELECT SYSDATE FROM DUAL;
+
 -- 10. **EMP테이블에서 사번, 사원명, 급여 조회
 --   (단, 급여는 100단위까지의 값만 출력 처리하고 급여 기준 내림차순 정렬)**
 SELECT EMPNO, ENAME, 
     ROUND(SAL, -2) 
 FROM EMP
 ORDER BY ROUND(SAL, -2) DESC; 
+
 -- 11. **EMP테이블에서 사원번호가 홀수인 사원들을 조회**
 SELECT * FROM EMP
 WHERE MOD(EMPNO, 2) = 1;
+
 -- 12. **EMP테이블에서 사원명, 입사일 조회 (단, 입사일은 년도와 월을 분리 추출해서 출력)**
 SELECT ENAME, 
     EXTRACT(YEAR FROM HIREDATE), 
     EXTRACT(MONTH FROM HIREDATE)
 FROM EMP;
+
 -- 13. **EMP테이블에서 9월에 입사한 직원의 정보 조회**
 SELECT * 
 FROM EMP
@@ -184,15 +188,16 @@ SELECT *
 FROM EMP
 WHERE INSTR(ENAME, 'R') = 3;
 
-
 -- - **LIKE 사용**
 -- 1. **EMP테이블에서 사번, 사원명, 입사일, 입사일로부터 40년 되는 날짜 조회**
 SELECT EMPNO, ENAME, HIREDATE, ADD_MONTHS(HIREDATE, 480)
 FROM EMP;
+
 -- 2. **EMP테이블에서 입사일로부터 38년 이상 근무한 직원의 정보 조회**
 SELECT *
 FROM EMP
 WHERE MONTHS_BETWEEN(SYSDATE, HIREDATE) >= 38;
+
 -- 3. **오늘 날짜에서 년도만 추출**
 SELECT EXTRACT(YEAR FROM SYSDATE)
 FROM DUAL;
