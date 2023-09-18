@@ -27,5 +27,12 @@ FROM EMP
 GROUP BY DEPTNO
 ORDER BY DEPTNO ASC;
 
--- HEAVING 절: GROUP BY 절이 존재할 떄만 사용 가능
+-- HAVING 절: GROUP BY 절이 존재할 떄만 사용 가능
 -- GROUP BY 절을 통해 그룹화된 결과 값의 번위를 제한할 때 사용
+SELECT DEPTNO, JOB, ROUND(AVG(SAL),2)
+FROM EMP
+GROUP BY DEPTNO, JOB    -- 부서별로 묶고 거기에 직업으로 한번더 나눔
+    HAVING AVG(SAL) >= 2000     -- 평균은 2000이상의 급여로 
+ORDER BY DEPTNO, JOB;
+
+
